@@ -1,0 +1,20 @@
+<div class="modal fade" id ="invite_user_modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Pixly - Invite a friend</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag refer_user_path(current_user) do |f| %>
+
+          <%= text_field_tag("invitee_email", params['invitee_email'], class:"form-control", placeholder: "Enter your freinds email") %>
+
+          <%= submit_tag("Send invite", id: "send_invite_btn", class:"btn btn-danger full-width form-control") %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

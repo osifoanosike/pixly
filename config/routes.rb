@@ -1,0 +1,21 @@
+Rails.application.routes.draw do
+
+  devise_for :users
+
+  root 'photos#index'
+
+  devise_scope :user do
+    match '/signout', to: 'devise/sessions#destroy', via: 'delete'
+    match '/login', to: 'devise/sessions#new', via: 'get'
+  end
+
+  resources :photos, only:[:new, :create] do
+    post :like, on: :member
+  end
+
+  resources :users, only:[:refer] do
+    post :refer, on: :member
+  end
+
+end
+  
