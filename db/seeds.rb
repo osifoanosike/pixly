@@ -8,7 +8,7 @@
 
 
 #create first user
-User.create!(email: "social.anosikeosifo@gmail.com", password: "test1234")
+User.create!(email: "anosike.c.osifo@gmail.com", password: "test1234")
 
 ["Artwork", "Landscape", "Portrait", "Randoms"].each do |category|
   Category.create!(name: category)
