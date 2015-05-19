@@ -3,10 +3,22 @@ class PhotosController < ApplicationController
 
   before_action :authenticate_user!, only: [:like]
 
+  before_action :get_filter_category, only: [:index], if: "params[:filter]"
+
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @categories = Category.all
+    if params[:filter]
+      @photos = Photo.where(category_id: @current_category.id)
+    else
+      @photos = Photo.all
+    end
+    respond_to do |format|
+      format.js
+      format.html { }
+    end
+    
   end
 
   # GET /photos/1
@@ -51,19 +63,16 @@ class PhotosController < ApplicationController
       logger.error "You've liked this post previously"
     else
       @photo.like(current_user.email)
-      if @photo.save
-        respond_to do |format|
+      respond_to do |format|
+        if @photo.save
           format.js { @liked_photo = @photo }
-          format.html { redirect_to root_url }
+          # format.html { redirect_to root_url }
+        else
+          format.js { @liked_photo = @photo } #redirect_to root_url  notice: "photo couldn't be liked right now, please try again"
+          logger.error "photo couldn't be liked right now, please try again"
         end
-      
-      else
-        redirect_to root_url #, notice: "photo couldn't be liked right now, please try again"
-        logger.error "photo couldn't be liked right now, please try again"
       end
-    end
-
-    
+    end   
   end
 
   private
@@ -83,6 +92,10 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:title, :image_url, :like_count)
+      params.require(:photo).permit(:title, :image_url, :like_count, :category_id)
+    end
+
+    def get_filter_category
+      @current_category = Category.find_by(name: params[:filter])
     end
 end

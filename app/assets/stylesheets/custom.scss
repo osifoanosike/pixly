@@ -22,3 +22,12 @@ form .form-control, form .btn  {
 .btn.full-width {
   width: 100%;
 }
+
+.navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #fcfcfc;
+}

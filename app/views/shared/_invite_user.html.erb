@@ -8,7 +8,7 @@
       <div class="modal-body">
         <%= form_tag refer_user_path(current_user) do |f| %>
 
-          <%= text_field_tag("invitee_email", params['invitee_email'], class:"form-control", placeholder: "Enter your freinds email") %>
+          <%= text_field_tag("invitee_email", params['invitee_email'], class:"form-control", placeholder: "Enter your friends email") %>
 
           <%= submit_tag("Send invite", id: "send_invite_btn", class:"btn btn-danger full-width form-control") %>
         <% end %>

@@ -1,0 +1,6 @@
+<% if @photos %>
+  $('#main-grid').html("<%= escape_javascript render @photos  %>");
+<% else %>
+  $('#main-grid').replaceWith("<h3>Oops! there are no posts to show</h3>");
+<% end %>
+

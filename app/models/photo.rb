@@ -1,6 +1,7 @@
 class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :likes
+  belongs_to :category
 
   def user_already_liked?(user_email)
     result = Like.where("email = ? and photo_id = ?", user_email, id)

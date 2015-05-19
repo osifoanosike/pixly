@@ -28,6 +28,7 @@ gem 'font-awesome-rails'
 gem 'normalize-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
+# gem 'debugger'
 
 gem 'devise'
 

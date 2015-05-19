@@ -1,10 +1,14 @@
-  <figure data-id="<%= photo.id %>" class="col-md-3 gallery-item force-inline-block">
+  <figure data-id="<%= photo.id %>" class="col-md-12 gallery-item force-inline-block">
     <%= image_tag(photo.image_url, class: "photo_img") %>
     <figcaption>
-      <p class="title"><%= photo.title %></p
+      <p class="title"><%= photo.title %></p>
 
+      <section class="info-section force-inline pull-left">
+        <span class="user_info"><%= photo.user ? photo.user.email : "testUser" %></span>
+        <span class="like_count"><%= pluralize(photo.like_count, "like") %></span>
+      </section>
       <section class="action_section">
-      <span class="like_count pull-left"><%= pluralize(photo.like_count, "like") %></span>
+      
         <%= button_to like_photo_path(photo), class: 'like_photo btn btn-default pull-right', remote: true do %>
                 <%= content_tag(:i, nil, class:"fa fa-heart-o") %>
         <% end %>
