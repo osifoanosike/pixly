@@ -1,0 +1,6 @@
+<figure data-id="<%= photo.id %>" class="col-md-11 gallery-item force-inline-block">
+  <%= image_tag(photo.image_url, class: "photo_img") %>
+  <figcaption>
+    <p class="title"><%= photo.user ? photo.user.email : "testUser" %> &middot <span><%= pluralize(photo.like_count, "like") %></span></p>
+  </figcaption>
+</figure>

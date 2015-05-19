@@ -8,6 +8,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
+    @trending_photos = Photo.order(like_count: :desc).first(10)
     @categories = Category.all
     if params[:filter]
       @photos = Photo.where(category_id: @current_category.id)
@@ -16,9 +17,8 @@ class PhotosController < ApplicationController
     end
     respond_to do |format|
       format.js
-      format.html { }
+      format.html
     end
-    
   end
 
   # GET /photos/1

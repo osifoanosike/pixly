@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .gallery-item  {
-  margin: .6em 1em;;
+  margin: .6em 1em;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 0;
@@ -21,6 +21,7 @@
   .title {
     margin-top: .5em;
     border-bottom: 1px solid #ccc;
+    font-weight: bold;
   }
 
   .btn { 
@@ -44,6 +45,24 @@
   }
 }
 //transitions:
+
+
+#trending-grid .gallery-item {
+  margin: 0 1em;
+  padding-bottom: 1.5em;
+
+  border-radius: 0;
+
+  box-shadow: none;
+  border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: none;
+  border-top: 0;
+
+  .title { text-align: right }
+}
+
+
 
 .gallery-item {
   -webkit-transition: all 0.5s ease-in;
