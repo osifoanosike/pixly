@@ -14,12 +14,12 @@ class User < ActiveRecord::Base
   after_create :set_referral 
 
   def set_referral_key
-    verifier = ActiveSupport::MessageVerifier.new(ENV['ref_generation_key'])
+    verifier = ActiveSupport::MessageVerifier.new("topguy_1611")
     return verifier.generate(id)
   end
 
   def self.decrypt_referral_key(referral_key)
-    verifier = ActiveSupport::MessageVerifier.new(ENV['ref_generation_key'])
+    verifier = ActiveSupport::MessageVerifier.new(ENV["topguy_1611")
     verifier.verify(referral_key)
   end
 
