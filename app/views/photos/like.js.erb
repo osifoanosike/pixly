@@ -1,6 +1,11 @@
-$("figure[data-id=<%= @liked_photo.id %>]")
-  .find('.like_photo').css({ "background-color": "red", "color": "#fff" })
-  .animate({'background-color':'#fff', "color": "#d10069" }, 2000);
+<% if @already_liked %>
+  $(".<%= @liked_photo.id %>.already_liked_notice").css({'color': 'red'})
+    .animate({'color':'transparent'}, 5000);
+<% else %>
+  $("figure[data-id=<%= @liked_photo.id %>]")
+    .find('.like_photo').css({ "background-color": "red", "color": "#fff" })
+    .animate({'background-color':'#fff', "color": "#d10069" }, 2000);
 
-$("figure[data-id=<%= @liked_photo.id %>]")
-  .find('.like_count').text("<%= pluralize(@liked_photo.like_count, 'like') %>");
+  $("figure[data-id=<%= @liked_photo.id %>]")
+    .find('.like_count').text("<%= pluralize(@liked_photo.like_count, 'like') %>");
+<% end %>

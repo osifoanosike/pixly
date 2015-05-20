@@ -1,0 +1,21 @@
+<div class="modal fade" id ="like_photo_form">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Pixly - Enter your email to like this photo</h5>
+      </div>
+      <div class="modal-body">
+        <p id="already_liked_notice"></p>
+        <%= form_tag like_photos_path, id:"like_photo_form", remote: true do |f| %>
+          <%= text_field_tag("user_email", params['user_email'], class:"form-control", placeholder: "Enter your email") %>
+
+          <%= submit_tag("Like photo", id: "like_photo_btn", class:"btn btn-danger full-width form-control") %>
+          <input id="like_photo_id" name="id" value="" type="hidden"/>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

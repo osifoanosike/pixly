@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy, :like]
 
-  before_action :authenticate_user!, only: [:like]
+  # before_action :authenticate_user!, only: [:like]
 
   before_action :get_filter_category, only: [:index], if: "params[:filter]"
 
@@ -10,15 +10,21 @@ class PhotosController < ApplicationController
   def index
     @trending_photos = Photo.order(like_count: :desc).first(10)
     @categories = Category.all
-    if params[:filter]
-      @photos = Photo.where(category_id: @current_category.id)
-    else
-      @photos = Photo.all
-    end
-    respond_to do |format|
-      format.js
-      format.html
-    end
+
+    # if session[:friendly_redirect]
+    #   redirect_to session[:friendly_redirect]
+    #   session[:friendly_redirect] = nil
+    # else
+      if params[:filter]
+        @photos = Photo.where(category_id: @current_category.id)
+      else
+        @photos = Photo.all
+      end
+      respond_to do |format|
+        format.js
+        format.html
+      end
+    # end
   end
 
   # GET /photos/1
@@ -58,11 +64,15 @@ class PhotosController < ApplicationController
   end
 
   def like
-    if @photo.user_already_liked?(current_user.email)
-      redirect_to root_url #, notice: "You've liked this post previously"
+    email = params[:user_email] ? params[:user_email] : current_user.email
+
+    if @photo.user_already_liked?(email)
+      respond_to do |format|
+        format.js { @already_liked = true, @liked_photo = @photo }
+      end
       logger.error "You've liked this post previously"
     else
-      @photo.like(current_user.email)
+      @photo.like(email)
       respond_to do |format|
         if @photo.save
           format.js { @liked_photo = @photo }
@@ -72,7 +82,7 @@ class PhotosController < ApplicationController
           logger.error "photo couldn't be liked right now, please try again"
         end
       end
-    end   
+    end    
   end
 
   private

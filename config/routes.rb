@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :photos, only:[:new, :create, :index] do
-    post :like, on: :member
+    post :like, on: :collection
   end
 
   resources :users, only:[:refer] do
