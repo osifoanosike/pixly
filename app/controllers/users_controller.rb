@@ -17,6 +17,6 @@ class UsersController < ApplicationController
   def welcome
     @referee = params[:welcome]
     @referer = User.decrypt_referral_key(params[:id])
-    render "devise/registrations/new", locals:{ resource: User.new }, layout: "welcome"
+    render "devise/registrations/new", locals:{ resource: User.new }, layout: nil
   end
 end
