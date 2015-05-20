@@ -68,15 +68,16 @@ class PhotosController < ApplicationController
 
     if @photo.user_already_liked?(email)
       respond_to do |format|
+        format.html { redirect_to root_url, notice: "You already liked this photo" }
         format.js { @already_liked = true, @liked_photo = @photo }
       end
-      logger.error "You've liked this post previously"
+      logger.error "You liked this post previously"
     else
       @photo.like(email)
       respond_to do |format|
         if @photo.save
           format.js { @liked_photo = @photo }
-          # format.html { redirect_to root_url }
+          format.html { redirect_to root_url }
         else
           format.js { @liked_photo = @photo } #redirect_to root_url  notice: "photo couldn't be liked right now, please try again"
           logger.error "photo couldn't be liked right now, please try again"

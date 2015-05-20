@@ -1,5 +1,5 @@
   <figure data-id="<%= photo.id %>" class="col-md-12 gallery-item force-inline-block">
-    <%= image_tag(photo.image_url, class: "photo_img") %>
+    <%= image_tag(image_path(photo.image_url), class: "photo_img") %>
     <figcaption>
       <p class="title"><%= photo.title %></p>
 
@@ -11,8 +11,8 @@
       <section class="action_section pull-right">
         <span class="<%= photo.id %> already_liked_notice">You've already liked this photo</span>
         <% if current_user %>
-          <%= button_to like_photos_path, data: { photo_id: photo.id }, class: 'like_photo btn btn-default pull-right', remote: true do %>
-                  <%= content_tag(:i, nil, class:"fa fa-heart-o") %>
+          <%= button_to like_photos_path(id: photo.id), data: { photo_id: photo.id }, class: 'like_photo btn btn-default pull-right', remote: true do %>
+              <%= content_tag(:i, nil, class:"fa fa-heart-o") %>
           <% end %>
         <% else %>
           <button data-photo-id="<%= photo.id %>" class="like_photo guest_like_btn btn btn-default"><i class="fa fa-heart-o"></i></button>
