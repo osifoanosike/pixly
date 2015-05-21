@@ -1,6 +1,6 @@
 <% if @already_liked %>
   $(".<%= @liked_photo.id %>.already_liked_notice").css({'color': '#fff', 'background-color': 'red'})
-    .animate({'color':'#fff', 'background-color': '#fff'}, 5000);
+    .animate({'color':'#fff', 'background-color': 'transparent'}, 5000);
 <% else %>
   $("figure[data-id=<%= @liked_photo.id %>]")
     .find('.like_photo').css({ "background-color": "red", "color": "#fff" })

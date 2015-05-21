@@ -4,41 +4,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # after_action :save_referral, only: [:create]
 
   #POST /resource
-  # def create
-  #   build_resource(sign_up_params)
-
-  #   # resource.sender_id = params[:sender_id]
-  #    resource.save
-
-
-  #   yield resource if block_given?
-  #   if resource.persisted?
-
-  #     referrer = User.find(prams[:sender_id])
-  #     referral = referer.referrals.build(referee_id: resource.id)
-  #     unless referral.save
-
-  #     end 
-
-  #     if resource.active_for_authentication?
-  #       set_flash_message :notice, :signed_up if is_flashing_format?
-  #       sign_up(resource_name, resource)
-  #       respond_with resource, location: root_url #after_sign_up_path_for(resource)
-  #     else
-  #       set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-  #       expire_data_after_sign_in!
-  #       # respond_with resource, location: after_inactive_sign_up_path_for(resource)
-  #     end
-  #   else
-  #     clean_up_passwords resource
-  #     # set_minimum_password_length
-  #     # respond_with resource
-  #   end
-  # end
-
-  create do |resource|
-    if resource.persisted? && params[:sender_id]
-      Referral.create!(referer_id: params[:sender_id], referee_id: resource.id)
+  def create
+    super do
+      if resource.persisted? && params[:sender_id]
+        Referral.create!(referer_id: params[:sender_id], referee_id: resource.id)
+      end
     end
   end
 end

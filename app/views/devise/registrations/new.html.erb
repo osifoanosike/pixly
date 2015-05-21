@@ -1,43 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pixly</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="container"> 
-    <div class="col-md-12">
-      <% if notice || alert %>
-        <div class="alert alert-info alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong><%= notice || alert %></strong>
-        </div>
-      <% end %>
+<section id="welcome-header">
+  <h3>Welcome to Pixly!</h3>
+    <p>Just setup ur password and you're in!</p>
+     </section>
 
-      <section id="content-holder">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">MENU</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="<%= root_path %>">Pixly  <small id="app-spec">lite</small></a>
-            </div>
-          </div><!-- /.container-fluid -->
-        </nav>
-
-        <section id="welcome-header">
-          <h3>Welcome to Pixly!</h3>
-          <p>Just setup ur password and you're in!</p>
-        </section>
-
-        <section id="welcome-form">
+      <section id="welcome-form">
           <%= form_for(resource, url: user_registration_path(resource)) do |f| %>
             <div class="field form-section">
               <%= f.email_field :email, value: @referee, class: "form-control" %>
@@ -60,8 +26,3 @@
             </div>
           <% end %>
         </section>
-      </section>
-    </div>
-  </div>
-</body>
-</html>

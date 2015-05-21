@@ -60,32 +60,17 @@ class PhotosController < ApplicationController
 
   def like
     email = params[:user_email] ? params[:user_email] : current_user.email
-    @like = Like.new(email: email, photo_id: params[:photo_id])
-    if @like.save
-      format.js { @liked_photo = @photo }
-      format.html { redirect_to root_url }
-    else
-      format.html { redirect_to root_url, notice: "You already liked this photo" }
-      format.js { @already_liked = true, @liked_photo = @photo }
-    end
-    # if @photo.user_already_liked?(email)
-    #   respond_to do |format|
-    #     format.html { redirect_to root_url, notice: "You already liked this photo" }
-    #     format.js { @already_liked = true, @liked_photo = @photo }
-    #   end
-    #   logger.error "You liked this post previously"
-    # else
-    #   @photo.like(email)
-    #   respond_to do |format|
-    #     if @photo.save
-    #       format.js { @liked_photo = @photo }
-    #       format.html { redirect_to root_url }
-    #     else
-    #       format.js { @liked_photo = @photo } #redirect_to root_url  notice: "photo couldn't be liked right now, please try again"
-    #       logger.error "photo couldn't be liked right now, please try again"
-    #     end
-    #   end
-    #end    
+    @like = Like.new(email: email, photo_id: params[:id])
+
+    respond_to do |format|
+      if @like.save
+        format.js { @liked_photo = @photo }
+        format.html { redirect_to root_url }
+      else
+        format.html { redirect_to root_url, notice: "You already liked this photo" }
+        format.js { @already_liked = true, @liked_photo = @photo }
+      end
+    end   
   end
 
   private
