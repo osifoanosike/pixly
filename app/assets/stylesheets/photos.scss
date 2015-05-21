@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .gallery-item  {
-  margin: .6em 1em;
+  margin: .4em .3em;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 0;
@@ -11,7 +11,7 @@
   box-shadow: 0px 0px 8px 2px #ccc;
   -moz-box-shadow: 0px 0px 8px 2px #ccc;
   -webkit-box-shadow: 0px 0px 8px 2px #ccc;
-  //width: 255px;
+  //height: 100%;
 
   img {
     width: 100%;
@@ -42,6 +42,10 @@
   figcaption {
     margin: .3em;
     margin-top: 1em;
+  }
+
+  .action_section {
+    position: relative;
   }
 }
 //transitions:
@@ -81,6 +85,7 @@
 }
 
 .info-section {
+
   //margin-top: 1em;
   span {
     margin-right: .5em;
@@ -90,4 +95,14 @@
       color: #4670a0;
     }
   }
+}
+
+.already_liked_notice {
+  font-size: .7em;
+  color: #fff;
+  margin-right: .5em;
+  margin-top: .6em;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 4px;
 }

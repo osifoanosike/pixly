@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     url = request.base_url
     invite_info = setup_referal(url)
     Invite.send_invite(invite_info).deliver_now
-    redirect_to url, notice: "Your invitation has been sent to #{params["invitee_email"]}"
+    redirect_to root_url , notice: "Your invitation has been sent to #{params["invitee_email"]}"
   end
 
   def setup_referal(host_url)

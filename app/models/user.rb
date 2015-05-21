@@ -1,17 +1,11 @@
 class User < ActiveRecord::Base
-  validates :email, presence: true
-  validates :email, uniqueness: true
-
-  # after_save :save_referral
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :photos
   has_many :referrals, foreign_key: "referer_id"
+
   attr_accessor :sender_id
-  after_create :set_referral 
+  after_create :set_referral, if: :sender_id
 
   def set_referral_key
     verifier = ActiveSupport::MessageVerifier.new("appinvites")

@@ -1,0 +1,10 @@
+<figure data-id="<%= photo.id %>" class="col-md-11 gallery-item force-inline-block">
+  <%= image_tag(photo.image_url, class: "photo_img") %>
+  <figcaption>
+    <p class="title"><%= photo.title %></p>
+
+    <section class="info-section force-inline pull-left">
+      <span class="user_info">By <%= photo.user ? photo.user.email : "testUser" %></span>
+    </section>
+  </figcaption>
+</figure>

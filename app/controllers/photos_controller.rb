@@ -11,20 +11,15 @@ class PhotosController < ApplicationController
     @trending_photos = Photo.order(like_count: :desc).first(10)
     @categories = Category.all
 
-    # if session[:friendly_redirect]
-    #   redirect_to session[:friendly_redirect]
-    #   session[:friendly_redirect] = nil
-    # else
-      if params[:filter]
-        @photos = Photo.where(category_id: @current_category.id)
-      else
-        @photos = Photo.all
-      end
-      respond_to do |format|
-        format.js
-        format.html
-      end
-    # end
+    if params[:filter]
+      @photos = Photo.where(category_id: @current_category.id)
+    else
+      @photos = Photo.all
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /photos/1
@@ -45,7 +40,7 @@ class PhotosController < ApplicationController
   # POST /photos.json
   def create
     @photo = current_user.photos.build(photo_params)
-    @photo.image_url  = upload_photo_and_return_location
+    @photo.image_url  = upload_photo_and_return_name
     respond_to do |format|
       if @photo.save
         format.html { redirect_to root_url }
@@ -65,25 +60,32 @@ class PhotosController < ApplicationController
 
   def like
     email = params[:user_email] ? params[:user_email] : current_user.email
-
-    if @photo.user_already_liked?(email)
-      respond_to do |format|
-        format.html { redirect_to root_url, notice: "You already liked this photo" }
-        format.js { @already_liked = true, @liked_photo = @photo }
-      end
-      logger.error "You liked this post previously"
+    @like = Like.new(email: email, photo_id: params[:photo_id])
+    if @like.save
+      format.js { @liked_photo = @photo }
+      format.html { redirect_to root_url }
     else
-      @photo.like(email)
-      respond_to do |format|
-        if @photo.save
-          format.js { @liked_photo = @photo }
-          format.html { redirect_to root_url }
-        else
-          format.js { @liked_photo = @photo } #redirect_to root_url  notice: "photo couldn't be liked right now, please try again"
-          logger.error "photo couldn't be liked right now, please try again"
-        end
-      end
-    end    
+      format.html { redirect_to root_url, notice: "You already liked this photo" }
+      format.js { @already_liked = true, @liked_photo = @photo }
+    end
+    # if @photo.user_already_liked?(email)
+    #   respond_to do |format|
+    #     format.html { redirect_to root_url, notice: "You already liked this photo" }
+    #     format.js { @already_liked = true, @liked_photo = @photo }
+    #   end
+    #   logger.error "You liked this post previously"
+    # else
+    #   @photo.like(email)
+    #   respond_to do |format|
+    #     if @photo.save
+    #       format.js { @liked_photo = @photo }
+    #       format.html { redirect_to root_url }
+    #     else
+    #       format.js { @liked_photo = @photo } #redirect_to root_url  notice: "photo couldn't be liked right now, please try again"
+    #       logger.error "photo couldn't be liked right now, please try again"
+    #     end
+    #   end
+    #end    
   end
 
   private
@@ -92,7 +94,7 @@ class PhotosController < ApplicationController
       @photo = Photo.find(params[:id])
     end
 
-    def upload_photo_and_return_location
+    def upload_photo_and_return_name
       photo_img = photo_params[:image_url]
       File.open(Rails.root.join('app', 'assets', 'images', photo_img.original_filename), 'wb') do |file|
         file.write(photo_img.read)

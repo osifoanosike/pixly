@@ -45,8 +45,23 @@ form .form-control, form .btn  {
   margin-right: .5em;
   margin-top: .6em;
   display: inline-block;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  bottom: 0;
+  right: 0
 }
 
 form.button_to {
   display: inline !important;
 }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #4670a0;
+  color: #fff;
+}
+
+
+.gallery-item { width: 23%; }
+.gallery-item.w2 { width: 50%; } 
