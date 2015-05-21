@@ -10,13 +10,13 @@
       </section>
       <section class="action_section pull-right">
         <span class="<%= photo.id %> already_liked_notice">You already liked this</span>
-        <button data-photo-id="<%= photo.id %>" class="share_photo guest_like_btn btn btn-default"><i class="fa fa-share-alt"></i></button>
         <% if current_user %>
+          <button data-photo-id="<%= photo.id %>" class="share_photo btn btn-default" data-image="<%= image_path(photo.image_url) %>"><i class="fa fa-share-alt"></i></button>
           <%= button_to like_photos_path(id: photo.id), data: { photo_id: photo.id }, class: 'like_photo btn btn-default pull-right', remote: true do %>
-              <%= content_tag(:i, nil, class:"fa fa-heart-o") %>
+              <%= content_tag(:i, nil, class:"fa fa-heart") %>
           <% end %>
         <% else %>
-          <button data-photo-id="<%= photo.id %>" class="like_photo guest_like_btn btn btn-default"><i class="fa fa-heart-o"></i></button>
+          <button data-photo-id="<%= photo.id %>" class="like_photo guest_like_btn btn btn-default"><i class="fa fa-heart"></i></button>
         <% end %>
       </section
     </figcaption>

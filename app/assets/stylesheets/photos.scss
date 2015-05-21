@@ -29,14 +29,15 @@
   .btn { 
     margin-top: 0;
     padding: .2em;
-    color: #d10069;
+    color: #bbc6d3;
     margin-bottom: .5em;
     margin-left: .5em;
     border: none;
 
     &:hover {
       background: #fff;
-      border: 1px solid #d10069;
+      border: none;
+      color: #d10069
     }
 
   }
@@ -90,7 +91,7 @@
 
 .info-section {
 
-  //margin-top: 1em;
+  font-size: .8em;
   span {
     margin-right: .5em;
 
@@ -112,4 +113,12 @@
   border-radius: 4px;
   width: 11em;
   padding-left: 1em;
+}
+
+#share_image_view {
+  img { margin-top: 1em; }
+
+ .modal-dialog {
+    width: 420px !important;
+  }
 }

@@ -40,18 +40,7 @@ form .form-control, form .btn  {
   margin-top: 0;
 }
 
-.already_liked_notice {
-  color: #fff;
-  margin-right: .5em;
-  margin-top: .6em;
-  display: inline-block;
-  position: absolute;
-  background-color: #fff;
-  border-radius: 4px;
-  width: 100%;
-  bottom: 0;
-  right: 0
-}
+
 
 form.button_to {
   display: inline !important;
@@ -62,6 +51,12 @@ form.button_to {
   color: #fff;
 }
 
+
+//handle modal's backdrop
+.modal-backdrop.in {
+  opacity: 0.80;
+  filter: alpha(opacity=80);
+}
 
 .gallery-item { width: 23%; }
 .gallery-item.w2 { width: 50%; } 
