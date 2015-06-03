@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     match '/login', to: 'devise/sessions#new', via: 'get'
   end
 
-  resources :photos, only:[:new, :create, :index] do
+  resources :photos, only:[:new, :create, :index, :show] do
     post :like, on: :collection
+    post :share, on: :collection
   end
 
   resources :users, only:[:refer] do

@@ -1,13 +1,9 @@
-
-// var container = document.querySelector("#main-container");
-
-// var msonry = new Masonry(container, {
-//   columnWidth: 200,
-//   itemSelector: '.gallery-item'
-// });
-
-
 $(document).on('page:change', function(){
+  console.log("the page has loaded");
+});
+
+
+$(document).on('page:update', function(){
   var $container = $('#main-container');
   // initialize
   $container.imagesLoaded(function(){
@@ -16,4 +12,4 @@ $(document).on('page:change', function(){
       itemSelector: '.gallery-item'
     });
   });
-});
+})

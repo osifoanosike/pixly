@@ -1,5 +1,12 @@
+
 <% if @photos %>
-  $('#main-grid').html("<%= escape_javascript render @photos  %>");
+  var $newElems = "<%= escape_javascript render @photos %>";
+  $newElems.hide();
+
+  $newElems.imagesLoaded(function(){
+    $newElems.fadeIn(); // fade in when ready
+    $('#main-container').isotope( 'appended', $newElems );
+  });
 <% else %>
   $('#main-grid').replaceWith("<h3>Oops! there are no posts to show</h3>");
 <% end %>

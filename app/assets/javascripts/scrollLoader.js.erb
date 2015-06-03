@@ -1,0 +1,46 @@
+function ScrollLoader(container) {
+  this.container = container;
+  this.pageNos = 1
+}
+
+
+ScrollLoader.prototype = {
+  
+  loadNext3: function() {
+    var that = this;
+    $.ajax({ url: ('/photos?page=' + ++this.pageNos), beforeSend: function() { that.showLoadingIndicator(); }});
+  },
+
+  isScrolledToBottom: function() {
+    var browserPos =  $(window).scrollTop() + $(window).height();
+    if ( browserPos == $(document).height() ) {
+        return true
+    }
+  },
+
+  showLoadingIndicator: function() {
+    var loader = $('<img/>', { id: "loaderImg", src: "<%= asset_path('ajax-loader.gif') %>" })
+                  .appendTo($('#content-holder'));
+    $('#content-holder').remove('#loaderImg');
+  },
+
+  addEventHandlers: function() {
+    var that = this;
+
+    $(window).scroll(function(){
+      if (that.isScrolledToBottom()) {
+        that.loadNext3();
+        console.log("at the bottom of the page");
+      }
+    });
+  }
+
+}
+
+$(document).on('page:change', function(){
+  var container = $('#main-container');
+
+  var scroller = new ScrollLoader(container)
+  scroller.addEventHandlers();
+
+});

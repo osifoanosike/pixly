@@ -1,0 +1,7 @@
+around_save
+
+  everything that has to do with save  
+
+end
+
+after_save

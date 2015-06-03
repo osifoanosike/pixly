@@ -2,6 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.centralize {
+  text-align: center;
+  vertical-align: middle;
+
+  * { vertical-align: center; }
+}
+
+
+
+.overlay {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  display: block;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.0);
+
+  p { 
+    color: transparent;
+    font-size: 1.2em;
+    margin-top: 2em;
+  }
+}
+
 .gallery-item  {
   margin: .4em .3em;
   border: 1px solid #ccc;
@@ -11,7 +37,6 @@
   box-shadow: 0px 0px 8px 2px #ccc;
   -moz-box-shadow: 0px 0px 8px 2px #ccc;
   -webkit-box-shadow: 0px 0px 8px 2px #ccc;
-  //height: 100%;
 
   img {
     width: 100%;
@@ -76,7 +101,7 @@
 
 
 
-.gallery-item {
+.gallery-item, .overlay {
   -webkit-transition: all 0.5s ease-in;
   -moz-transition: all 0.5s ease-in;
   -o-transition: all 0.5s ease-in;
@@ -87,6 +112,12 @@
   box-shadow: 0px 0px 3px 1px #d10069;
   -moz-box-shadow: 0px 0px 3px 1px #d10069;
   -webkit-box-shadow: 0px 0px 3px 1px #d10069;  
+
+  .overlay {
+    background: rgba(0, 0, 0, 0.7);
+
+    p { color: #fff; }
+  }
 }
 
 .info-section {
@@ -102,12 +133,19 @@
   }
 }
 
+
+.gallery-item-show {
+  width: 100%;
+
+  img { width: 500px; }
+}
+
 .already_liked_notice {
   display: inline-block !important;
   font-size: .8em;
   //font-weight: bold;
   color: #fff;
-  margin-right: 3.2em;
+  margin-right: 0.6em;
   margin-bottom: 1em;
   background-color: transparent;
   border-radius: 4px;

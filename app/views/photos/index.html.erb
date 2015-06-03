@@ -1,10 +1,8 @@
-<section id="main-container" class="col-md-12 col-sm-12">
-  <% if @photos %>
-    <%= render @photos %>
-  <% else %>
-    <h3>Oops! there are no photos to show!</h3>
-  <% end %>
-</section>
+<% if current_user %>
+  <%= render "photos/user_feed" %>
+<% else %>
+  <%= render "photos/explore_view" %>
+<% end %>
 
 <!-- <section id="trending-grid" class="col-md-4 col-sm-0">
   <h4 class="well well-sm">Trending</h4>

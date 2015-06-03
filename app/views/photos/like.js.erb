@@ -5,7 +5,7 @@
   $("figure[data-id=<%= @liked_photo.id %>]")
     .find('.like_photo').css({ "background-color": "red", "color": "#fff" })
     .animate({'background-color':'#fff', "color": "#d10069" }, 2000);
-
+    
   $("figure[data-id=<%= @liked_photo.id %>]")
-    .find('.like_count').text("<%= pluralize(@liked_photo.like_count, 'like') %>");
+    .find('.like_count').html("<%= pluralize(@liked_photo.like_count + 1, 'like') %>");
 <% end %>

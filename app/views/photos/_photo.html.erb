@@ -1,7 +1,12 @@
   <figure data-id="<%= photo.id %>" class="gallery-item">
-    <%= image_tag(image_path(photo.image_url), class: "photo_img") %>
+    <%= image_tag(photo.image_url, class: "photo_img") %>
+    <a href="<%= photo_path(photo) %>">
+      <div class="overlay centralize">
+        <p><%= photo.title %></p>
+      </div>
+    </a>
     <figcaption>
-      <p class="title"><%= photo.title %></p>
+      <!-- <p class="title"><%= photo.title %></p> -->
 
       <section class="info-section force-inline pull-left">
         <span class="user_info"><%= photo.user ? photo.user.email.split('@')[0] : "testUser" %></span><br/>

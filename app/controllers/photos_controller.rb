@@ -9,13 +9,16 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @trending_photos = Photo.order(like_count: :desc).first(10)
-    @categories = Category.all
+    # @categories = Category.all
 
     if params[:filter]
       @photos = Photo.where(category_id: @current_category.id)
+    elsif params[:page]
+      @photos = Photo.offset(params[:page].to_i * 3).limit(3)
     else
-      @photos = Photo.all
+      @photos = Photo.first(10)
     end
+
     respond_to do |format|
       format.js
       format.html
@@ -25,6 +28,7 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    # @photo
   end
 
   # GET /photos/new
@@ -71,6 +75,16 @@ class PhotosController < ApplicationController
         format.js { @already_liked = true, @liked_photo = @photo }
       end
     end   
+  end
+
+  def share
+    share_info = {}
+    share_info['email'] = params[:invitee_email]
+    share_info['photo_path'] = photo_url(params[:photo])
+    share_info["image_url"] = "#{request.base_url}/#{Photo.find(params[:photo]).image_url}"
+    
+    PhotoMailer.share(share_info).deliver_now
+    redirect_to root_url
   end
 
   private

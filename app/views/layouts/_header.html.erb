@@ -18,7 +18,7 @@
       <% end %>
 
        <ul class="nav navbar-nav pull-right">
-          <% @categories.each do |category| %>
+          <%  Category.all.each do |category| %>
             <li><%= link_to category.name, photos_path(filter: category.name), remote: true %></li>
           <% end %>
         </ul>

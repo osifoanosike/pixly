@@ -6,8 +6,8 @@
         <h5 class="modal-title">Pixly - Share Pic</h5>
       </div>
       <div class="modal-body">
-        <%= form_tag refer_user_path(current_user) do |f| %>
-          <%= hidden_field_tag "", name: "image_url", id: "share_image_url" %>
+        <%= form_tag share_photos_path do |f| %>
+          <%= hidden_field_tag  "", nil, name: "photo", id: "share_image" %>
           
           <div class="form-section">
             <%= text_field_tag("invitee_email", params['invitee_email'], class:"form-control", placeholder: "Enter your friends email and hit enter to share") %>

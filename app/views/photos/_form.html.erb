@@ -16,7 +16,7 @@
   </div>
 
   <div class="form-section">
-    <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category"}, class: "form-control"%>
+    <%= f.collection_select :category_id,  Category.all, :id, :name, { prompt: "Select a category"}, class: "form-control"%>
   </div>
 
   <div class="form-section">
